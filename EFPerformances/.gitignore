@@ -1,0 +1,52 @@
+# Archivos de compilación
+[Bb]in/
+[Oo]bj/
+*.exe
+*.dll
+*.pdb
+*.ilk
+*.resources
+*.cache
+*.suo
+*.userprefs
+*.user
+*.pfx
+*.snk
+*.DesignTime.cs
+
+# Carpetas de paquetes
+packages/
+
+# Resultados de pruebas
+TestResults/
+*.trx
+*.vsmdi
+*.testsettings
+
+# Configuraciones de usuario específicas
+*.vssettings
+*.vshost.exe
+*.vshost.exe.config
+*.sln.docstates
+
+# Archivos de NuGet
+*.nupkg
+*.snupkg
+
+# Archivos de desarrollo local
+.vs/
+_resharper*/
+
+# Archivos de contenedores (Docker)
+docker-compose*.yml
+.dockerignore
+
+# Otros archivos temporales del sistema operativo
+Thumbs.db
+.DS_Store
+
+# Archivos específicos del IDE (Rider)
+.idea/
+
+# Archivos de publicación
+Publish/
