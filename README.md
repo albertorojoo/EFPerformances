@@ -103,8 +103,8 @@ Author (1) ---- (N) Book (N) ---- (1) Category
 
 | Strategy           | Generated Queries   | Time (ms)    | Advantages                               | Disadvantages                        |
 |--------------------|---------------------|--------------|------------------------------------------|---------------------------------------|
-| **Eager Loading**  | 1                   | Fast         | Fewer database roundtrips                | May load unnecessary data             |
-| **Lazy Loading**   | N+1 (per relation)  | Slower       | Loads only accessed data                 | More SQL queries                      |
+| **Eager Loading**  | 1                   | Slower         | Fewer database roundtrips                | May load unnecessary data             |
+| **Lazy Loading**   | N+1 (per relation)  | Fast       | Loads only accessed data                 | More SQL queries                      |
 | **Explicit Loading** | N+1 (controlled)  | Moderate     | Full control over loaded relationships   | Requires more manual code             |
 
 ---
