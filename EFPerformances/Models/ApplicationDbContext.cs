@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Faker;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,40 +16,60 @@ namespace EFPerformances.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data Source=Library.db")
-                .LogTo(Console.WriteLine);
+            optionsBuilder.UseSqlite("Data Source=Library.db");
+                //.LogTo(Console.WriteLine);
         }
 
         public static void SeedData(ApplicationDbContext context)
         {
+            if (!context.Categories.Any())
+            {
+                var categories = new List<Category>
+                {
+                    new Category { Name = "Science Fiction" },
+                    new Category { Name = "Fantasy" },
+                    new Category { Name = "Mystery" },
+                    new Category { Name = "Romance" },
+                    new Category { Name = "Non-Fiction" }
+                };
+                context.Categories.AddRange(categories);
+                context.SaveChanges();
+            }
+
             if (!context.Authors.Any())
             {
-                var categoria1 = new Category { Name = "Sports" };
-                var categoria2 = new Category { Name = "Software" };
-
-                var autor1 = new Author { Name = "Mike", Surname = "Doe Donovan" };
-                var autor2 = new Author { Name = "Bill", Surname = "Gates" };
-
-                var book1 = new Book
+                var authors = new List<Author>();
+                for (int i = 0; i < 100; i++)
                 {
-                    Title = "100 Years of Sport",
-                    PublishingYear = 1967,
-                    Author = autor1,
-                    Category = categoria1
-                };
+                    authors.Add(new Author
+                    {
+                        Name = Faker.Name.First(),
+                        Surname = Faker.Name.Last(),
+                    });
+                }
+                context.Authors.AddRange(authors);
+                context.SaveChanges();
+            }
 
-                var book2 = new Book
+            if (!context.Books.Any())
+            {
+                var authorIds = context.Authors.Select(a => a.Id).ToList();
+                var books = new List<Book>();
+
+                for (int i = 0; i < 1000; i++)
                 {
-                    Title = "CSharp Fundamentals",
-                    PublishingYear = 2024,
-                    Author = autor2,
-                    Category = categoria2
-                };
+                    books.Add(new Book
+                    {
+                        Title = Lorem.Sentence(3),
+                        CategoryId = RandomNumber.Next(1, 5),
+                        PublishingYear = RandomNumber.Next(1980, 2021),
+                        AuthorId = authorIds[RandomNumber.Next(authorIds.Count - 1)]
+                    });
+                }
 
-                context.AddRange(book1, book2);
+                context.Books.AddRange(books);
                 context.SaveChanges();
             }
         }
-
     }
 }

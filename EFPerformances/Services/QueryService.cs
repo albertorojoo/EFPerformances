@@ -30,8 +30,10 @@ namespace EFPerformances.Services
                 .ToList();
             stopwatch.Stop();
 
+            var list = new List<String>();
+
             foreach (var book in books)
-                Console.WriteLine($"{book.Title} - {book.Author.Name} {book.Author.Surname} - {book.Category.Name}");
+                list.Add($"{book.Title} - {book.Author.Name} {book.Author.Surname} - {book.Category.Name}");
 
             Console.WriteLine($"Time: {stopwatch.ElapsedMilliseconds} ms\n");
         }
@@ -44,8 +46,10 @@ namespace EFPerformances.Services
             var stopwatch = Stopwatch.StartNew();
             var books = _context.Books.ToList();
 
+            var list = new List<String>();
+
             foreach (var book in books)
-                Console.WriteLine($"{book.Title} - {book.Author.Name} {book.Author.Surname} - {book.Category.Name}");
+                list.Add($"{book.Title} - {book.Author.Name} {book.Author.Surname} - {book.Category.Name}");
 
             stopwatch.Stop();
 
@@ -60,11 +64,13 @@ namespace EFPerformances.Services
             var stopwatch = Stopwatch.StartNew();
             var books = _context.Books.ToList();
 
+            var list = new List<String>();
+
             foreach (var book in books)
             {
                 _context.Entry(book).Reference(x => x.Author).Load();
                 _context.Entry(book).Reference(x => x.Category).Load();
-                Console.WriteLine($"{book.Title} - {book.Author.Name} {book.Author.Surname} - {book.Category.Name}");
+                list.Add($"{book.Title} - {book.Author.Name} {book.Author.Surname} - {book.Category.Name}");
             }
             stopwatch.Stop();
 
