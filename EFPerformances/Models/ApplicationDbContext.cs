@@ -15,7 +15,8 @@ namespace EFPerformances.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data Source=Library.db");
+            optionsBuilder.UseSqlite("Data Source=Library.db")
+                .LogTo(Console.WriteLine);
         }
 
         public static void SeedData(ApplicationDbContext context)
