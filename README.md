@@ -21,7 +21,7 @@ A project to explore and compare data loading strategies in **Entity Framework C
 
 ## 🛠️ Technologies Used
 
-- **.NET 6**
+- **.NET 9**
 - **Entity Framework Core**
 - **SQLite**
 
